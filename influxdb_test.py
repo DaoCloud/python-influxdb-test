@@ -5,7 +5,7 @@ import time
 import random
 import threading
 import string
-from influxdb.influxdb08 import InfluxDBClient
+from influxdb import InfluxDBClient
 from config import INFLUXDB_PORT_8086_TCP_ADDR,INFLUXDB_PORT_8086_TCP_PORT,INFLUXDB_USERNAME,INFLUXDB_PASSWORD
 
 INFLUXDB_TIMEOUT=30
