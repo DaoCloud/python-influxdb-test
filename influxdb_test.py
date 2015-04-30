@@ -51,7 +51,7 @@ def read_data():
         data=client.query(query)
         for d in data:
             for ps in d['points']:
-                print '-->',' | '.join([str(i) for i in ps])
+                print '-->',' | '.join([str(i) for i in ps[-2:]])
         time.sleep(1)
 
 
