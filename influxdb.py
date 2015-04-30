@@ -4,6 +4,7 @@ import logging
 import time
 import random
 import threading
+import string
 from influxdb.influxdb08 import InfluxDBClient
 from config import INFLUXDB_PORT_8086_TCP_ADDR,INFLUXDB_PORT_8086_TCP_PORT,INFLUXDB_USERNAME,INFLUXDB_PASSWORD
 
@@ -15,10 +16,7 @@ series_columns=['int_time','random_string']
 LOG=logging.getLogger(__name__)
 
 def __gen_client():
-    u = urlparse(INFLUXDB_URL)
-    return InfluxDBClient(host=INFLUXDB_PORT_8086_TCP_ADDR,port=INFLUXDB_PORT_8086_TCP_PORT,
-            database=database,username=INFLUXDB_USERNAME,
-            password=INFLUXDB_PASSWORD,timeout=INFLUXDB_TIMEOUT)
+    return InfluxDBClient(host=INFLUXDB_PORT_8086_TCP_ADDR,port=INFLUXDB_PORT_8086_TCP_PORT,database=database,username=INFLUXDB_USERNAME,password=INFLUXDB_PASSWORD,timeout=INFLUXDB_TIMEOUT)
 
 
 def __init_db():
@@ -50,7 +48,7 @@ def read_data():
 	while True:
 		data=client.query(query)
 		for d in data:
-			print '>>>',d["name"],';'.join(d["columns"]),';'.join('|'.join([ p for p in d["points"]])
+			print '>>>',d["name"],';'.join(d["columns"]),';'.join([ '|'.join(p) for p in d["points"]])                                
 
 
 
