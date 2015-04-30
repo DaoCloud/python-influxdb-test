@@ -41,7 +41,7 @@ def write_data():
         points=[[int(time.time()),'-'.join(random.sample(string.lowercase+string.uppercase+string.digits,5))]]
         data=__gen_data(series_name,series_columns,points)
         client.write_points([data])
-        print 'WRITING<<<',','.join([str(p) for p in points[0]])
+        print '  <--',','.join([str(p) for p in points[0]])
         time.sleep(1)
 
 def read_data():
@@ -51,8 +51,7 @@ def read_data():
         data=client.query(query)
         for d in data:
             for ps in d['points']:
-                for p in ps:
-                    print 'READING>>>',' | '.join([str(i) for i in p])
+                print ' --> ',' | '.join([str(i) for i in ps])
         time.sleep(1)
 
 
