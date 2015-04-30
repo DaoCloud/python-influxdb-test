@@ -52,7 +52,8 @@ def read_data():
 
 
 if __name__=='__main__':
-	t1=threading.Thread(target=write_data)
-	t2=threading.Thread(target=read_data)
-	t1.start()
-	t2.start()
+    __init_db()
+    t1=threading.Thread(target=write_data)
+    t2=threading.Thread(target=read_data)
+    t1.start()
+    t2.start()
