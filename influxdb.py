@@ -20,26 +20,26 @@ def __gen_client():
 
 
 def __init_db():
-	client=__gen_client()
-	dbs=[d.get('name') for d in client.get_list_database()]
-	if not dbs or database not in dbs:
-		if not client.create_database(database):
-			raise Exception('INIT DB FAILED.')
+    client=__gen_client()
+    dbs=[d.get('name') for d in client.get_list_database()]
+    if not dbs or database not in dbs:
+        if not client.create_database(database):
+            raise Exception('INIT DB FAILED.')
 
 def __gen_data(name,columns,points):
-	assert len(columns)==len(points)
-	return {'name':name,
-			'columns':columns,
-			"points":points}
+    assert len(columns)==len(points)
+    return {'name':name,
+        'columns':columns,
+        "points":points}
 
 def write_data():
-	client=__gen_client()
-	while True:
-		points=[int(time.time),'-'.join(random.sample(string.lowercase+string.uppercase+string.digits,5))]
-		data=__gen_data(series_name,series_columns,points)
-		client.write([data])
-		print '<<<',series_name,';'.join(series_columns),';'.join(points)
-		time.sleep(1)
+    client=__gen_client()
+    while True:
+        points=[int(time.time),'-'.join(random.sample(string.lowercase+string.uppercase+string.digits,5))]
+        data=__gen_data(series_name,series_columns,points)
+        client.write([data])
+        print '<<<',series_name,';'.join(series_columns),';'.join(points)
+        time.sleep(1)
 
 def read_data():
     client=__gen_client()
