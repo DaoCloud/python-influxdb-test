@@ -24,7 +24,8 @@ def __init_db():
     dbs=[d.get('name') for d in client.get_list_database()]
     if not dbs or database not in dbs:
         if not client.create_database(database):
-            raise Exception('INIT DB FAILED.')
+            print 'err create db.'
+
 
 def __gen_data(name,columns,points):
     assert len(columns)==len(points)
@@ -57,3 +58,4 @@ if __name__=='__main__':
     t2=threading.Thread(target=read_data)
     t1.start()
     t2.start()
+    print 'END'
