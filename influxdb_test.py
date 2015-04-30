@@ -28,7 +28,7 @@ def __init_db():
 
 
 def __gen_data(name,columns,points):
-    assert len(columns)==len(points)
+    assert len(columns)==len(points[0])
     return {'name':name,
         'columns':columns,
         "points":points}
