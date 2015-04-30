@@ -39,7 +39,7 @@ def write_data():
         points=[[int(time.time()),'-'.join(random.sample(string.lowercase+string.uppercase+string.digits,5))]]
         data=__gen_data(series_name,series_columns,points)
         client.write_points([data])
-        print '<<<',series_name,';'.join(series_columns),';'.join(points[0])
+        print '<<<',series_name,';'.join(series_columns),';'.join([str(p) for p in points[0]])
         time.sleep(1)
 
 def read_data():
