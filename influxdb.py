@@ -34,7 +34,6 @@ def __gen_data(name,columns,points):
 
 def write_data():
 	client=__gen_client()
-	
 	while True:
 		points=[int(time.time),'-'.join(random.sample(string.lowercase+string.uppercase+string.digits,5))]
 		data=__gen_data(series_name,series_columns,points)
@@ -43,13 +42,13 @@ def write_data():
 		time.sleep(1)
 
 def read_data():
-	client=__gen_client()
-	query="select * from {%s} limit 10"%series_name
-	while True:
-		data=client.query(query)
-		for d in data:
-			print '>>>',d["name"],';'.join(d["columns"]),';'.join([ '|'.join(p) for p in d["points"]])                                
-
+    client=__gen_client()
+    query="select * from %s limit 10"%series_name
+    while True:
+        data=client.query(query)
+        for d in data:
+            print '>>>',d["name"],';'.join(d["columns"]),';'.join([ '|'.join(p) for p in d["points"]])
+        time.sleep(1)
 
 
 if __name__=='__main__':
