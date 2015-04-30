@@ -36,7 +36,7 @@ def __gen_data(name,columns,points):
 def write_data():
     client=__gen_client()
     while True:
-        points=[int(time.time),'-'.join(random.sample(string.lowercase+string.uppercase+string.digits,5))]
+        points=[int(time.time()),'-'.join(random.sample(string.lowercase+string.uppercase+string.digits,5))]
         data=__gen_data(series_name,series_columns,points)
         client.write([data])
         print '<<<',series_name,';'.join(series_columns),';'.join(points)
