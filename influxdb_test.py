@@ -59,8 +59,8 @@ if __name__=='__main__':
     __init_db()
     print 'COLUMNS :',' , '.join(series_columns)
     t1=threading.Thread(target=write_data)
-    time.sleep(5)
     t2=threading.Thread(target=read_data)
     t1.start()
+    time.sleep(5)
     t2.start()
     print 'END'
