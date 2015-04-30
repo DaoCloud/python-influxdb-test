@@ -42,7 +42,7 @@ def write_data():
         data=__gen_data(series_name,series_columns,points)
         client.write_points([data])
         print '<--',','.join([str(p) for p in points[0]])
-        time.sleep(0.3)
+        time.sleep(1)
 
 def read_data():
     client=__gen_client()
