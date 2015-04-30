@@ -22,9 +22,11 @@ def __gen_client():
 def __init_db():
     client=__gen_client()
     dbs=[d.get('name') for d in client.get_list_database()]
+    print 'DBS:',' , '.join(dbs)
     if not dbs or database not in dbs:
         if not client.create_database(database):
             print 'err create db.'
+            raise Exception('CAN NOT CREATE DB.')
 
 
 def __gen_data(name,columns,points):
@@ -39,21 +41,24 @@ def write_data():
         points=[[int(time.time()),'-'.join(random.sample(string.lowercase+string.uppercase+string.digits,5))]]
         data=__gen_data(series_name,series_columns,points)
         client.write_points([data])
-        print 'WRITE...',series_name,','.join(series_columns),','.join([str(p) for p in points[0]])
+        print 'WRITING<<<',','.join([str(p) for p in points[0]])
         time.sleep(1)
 
 def read_data():
     client=__gen_client()
-    query="select * from %s limit 10"%series_name
+    query="select * from %s limit 5"%series_name
     while True:
         data=client.query(query)
         for d in data:
-            print 'READ...',d["name"],','.join(d["columns"]),','.join([ '|'.join([str(i) for i in p]) for p in d["points"]])
+            for ps in d['points']:
+                for p in ps:
+                    print 'READING>>>',' | '.join([str(i) for i in p])
         time.sleep(1)
 
 
 if __name__=='__main__':
     __init_db()
+    print 'COLUMNS :',' , '.join(series_columns)
     t1=threading.Thread(target=write_data)
     t2=threading.Thread(target=read_data)
     t1.start()
